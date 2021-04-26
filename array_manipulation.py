@@ -6,13 +6,11 @@ import random
 import re
 import sys
 
+
 # Complete the arrayManipulation function below.
 def arrayManipulation(n, queries):
-    array = []
+    array = [0 for x in range(n)]
     highest = 0
-
-    for i in range(n):
-        array.append(0)
 
     for query in queries:
         start = query[0] - 1
@@ -21,17 +19,14 @@ def arrayManipulation(n, queries):
         ind = start
         for ind in range(start, end + 1):
             array[ind] += num
-
-    for value in array:
-        if value > highest:
-            highest = value
+            if array[ind] > highest:
+                highest = array[ind]
 
     return(highest)
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
-    valid = True
 
     nm = input().split()
 
@@ -45,15 +40,7 @@ if __name__ == '__main__':
         queries.append(list(map(int, input().rstrip().split())))
 
 
-    for query in queries:
-        if not (query[0] >= 1 and query[1] >= query[0] and query[1] <= n):
-            valid = False
-
-
-    if (n >= 3 and n <= 10**7 and m >= 1 and m <= 2*10**7 and valid):
-        result = arrayManipulation(n, queries)
-    else:
-        print('Invalid operation')
+    result = arrayManipulation(n, queries)
 
     fptr.write(str(result) + '\n')
 
