@@ -8,13 +8,17 @@ import sys
 
 # Complete the minimumSwaps function below.
 def minimumSwaps(arr):
+
+    array = dict(enumerate(arr,1))
+    array2 = {v:k for k,v in array.items()}
     swaps = 0
-    for i in range(1, len(arr)):
-        if(arr.index(i) != i - 1):
-            arr[arr.index(i)] = arr[i - 1]
-            arr[i -1 ] = i
+    for v in array:
+        x = array[v]
+        if x != v:
+            y = array2[v]
+            array[y] = x
+            array2[x] = y
             swaps += 1
-    print(arr)
     return(swaps)
 
 
